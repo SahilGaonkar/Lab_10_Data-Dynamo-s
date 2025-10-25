@@ -36,3 +36,9 @@ str(airquality)
 # Scatter Chart
 
 # Box Plot
+
+# Load dataset
+data(airquality)
+
+# View structure
+str(airquality)
