@@ -32,7 +32,7 @@ str(airquality)
 # Histogram
 
 # Dot Chart
-
+data(airquality)
 # Scatter Chart
 
 # Box Plot
