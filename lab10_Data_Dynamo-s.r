@@ -83,9 +83,48 @@ print("Bar plot created and saved to images/barplot_ozone_by_month.png")
 # SECTION 3: LINE CHART - Prabhanjan Halvegar (2306)
 # ====================================================================
 plot_line_chart <- function() {
+  # LINE CHART — by Prabhanjan Halvegar (2306)
+  # Plot: Daily Temperature Trend by Month (airquality dataset)
   
+  # Ensure necessary data is available
+  data("airquality")
+  air_data <- na.omit(airquality)
+  air_data$Month <- factor(air_data$Month,
+                           levels = c(5, 6, 7, 8, 9),
+                           labels = c("May", "June", "July", "August", "September"))
   
-  cat("Line Chart section - Prabhanjan Halvegar\n")
+  # Unique months and colors
+  unique_months <- unique(air_data$Month)
+  colors <- rainbow(length(unique_months))
+  
+  # Create blank plot frame
+  plot(NULL,
+       xlim = c(1, 31),
+       ylim = range(air_data$Temp, na.rm = TRUE),
+       main = "Daily Temperature Trend by Month (New York, 1973)",
+       xlab = "Day of Month",
+       ylab = "Temperature (°F)")
+  
+  # Add separate line for each month
+  for (i in seq_along(unique_months)) {
+    month_data <- subset(air_data, Month == unique_months[i])
+    lines(month_data$Day, month_data$Temp, col = colors[i], lwd = 2)
+  }
+  
+  # Add legend
+  legend("topright",
+         legend = unique_months,
+         col = colors,
+         lwd = 2,
+         cex = 0.8,
+         title = "Month")
+  
+  # Save the plot as an image file (like other teammates)
+  if (!dir.exists("images")) dir.create("images")
+  dev.copy(png, filename = "images/linechart_temperature_trend.png", width = 800, height = 500)
+  dev.off()
+  
+  cat("Line Chart section - Prabhanjan Halvegar (2306) - Complete\n")
 }
 
 # ====================================================================
