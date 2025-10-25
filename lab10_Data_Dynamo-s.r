@@ -32,10 +32,7 @@ month_colors <- c("steelblue", "seagreen3", "darkorange", "firebrick3", "purple"
 # SECTION 1: PIE CHART - Esha Kambli (2301)
 # ====================================================================
 plot_pie_chart <- function() {
-  # Add your pie chart code here
-  # Example structure:
-  # slices <- table(air_data$Month)
-  # pie(slices, main="Distribution by Month", col=month_colors)
+  
   
   cat("Pie Chart section - Esha Kambli\n")
 }
@@ -44,9 +41,7 @@ plot_pie_chart <- function() {
 # SECTION 2: BAR CHART - Sarvadhnya Patil (2321)
 # ====================================================================
 plot_bar_chart <- function() {
-  # Add your bar chart code here
-  # Example structure:
-  # barplot(table(air_data$Month), main="Bar Chart", col=month_colors)
+
   
   cat("Bar Chart section - Sarvadhnya Patil\n")
 }
@@ -55,9 +50,7 @@ plot_bar_chart <- function() {
 # SECTION 3: LINE CHART - Prabhanjan Halvegar (2306)
 # ====================================================================
 plot_line_chart <- function() {
-  # Add your line chart code here
-  # Example structure:
-  # plot(air_data$Day, air_data$Temp, type="l", main="Line Chart")
+  
   
   cat("Line Chart section - Prabhanjan Halvegar\n")
 }
@@ -66,7 +59,7 @@ plot_line_chart <- function() {
 # SECTION 4: STACKED BAR CHART - Sahil Gaonkar (2305)
 # ====================================================================
 plot_stacked_bar <- function() {
-  # Add your stacked bar chart code here
+  
   
   cat("Stacked Bar Chart section - Sahil Gaonkar\n")
 }
@@ -75,9 +68,7 @@ plot_stacked_bar <- function() {
 # SECTION 5: HISTOGRAM - Aarchi Teli (2318)
 # ====================================================================
 plot_histogram <- function() {
-  # Add your histogram code here
-  # Example structure:
-  # hist(air_data$Temp, main="Temperature Distribution", col="skyblue")
+  
   
   cat("Histogram section - Aarchi Teli\n")
 }
@@ -137,9 +128,7 @@ plot_dot_chart <- function() {
 # SECTION 7: SCATTER CHART - Harsh Palyekar (2329)
 # ====================================================================
 plot_scatter_chart <- function() {
-  # Add your scatter chart code here
-  # Example structure:
-  # plot(air_data$Temp, air_data$Ozone, main="Scatter Plot")
+
   
   cat("Scatter Chart section - Harsh Palyekar\n")
 }
@@ -148,9 +137,7 @@ plot_scatter_chart <- function() {
 # SECTION 8: BOX PLOT - Deversh Shetgaonkar (2302)
 # ====================================================================
 plot_box_plot <- function() {
-  # Add your box plot code here
-  # Example structure:
-  # boxplot(Ozone ~ Month, data=air_data, main="Box Plot", col=month_colors)
+
   
   cat("Box Plot section - Deversh Shetgaonkar\n")
 }
