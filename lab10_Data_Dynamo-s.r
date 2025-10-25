@@ -91,11 +91,54 @@ plot_line_chart <- function() {
 # ====================================================================
 # SECTION 4: STACKED BAR CHART - Sahil Gaonkar (2305)
 # ====================================================================
+# ====================================================================
+# STACKED BAR CHART - Sahil Gaonkar (2305)
+# ====================================================================
 plot_stacked_bar <- function() {
-  
-  
-  cat("Stacked Bar Chart section - Sahil Gaonkar\n")
+  # Install & load required packages
+  if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2"); library(ggplot2)
+  if (!require("dplyr", quietly = TRUE)) install.packages("dplyr"); library(dplyr)
+
+  # Load dataset
+  data("airquality")
+  df <- airquality
+
+  # Keep only May–September
+  df <- df %>% filter(Month >= 5 & Month <= 9)
+
+  # Convert Month to factor for proper order
+  df$Month <- factor(df$Month, levels = 5:9,
+                     labels = c("May", "June", "July", "August", "September"))
+
+  # Categorize Ozone levels as factor
+  # Reverse the factor order for top-to-bottom stacking
+  df <- df %>% mutate(
+    Ozone_Level = case_when(
+      is.na(Ozone) ~ "Missing",
+      Ozone < 30   ~ "Low (<30)",
+      Ozone <= 60  ~ "Medium (30–60)",
+      TRUE         ~ "High (>60)"
+    ),
+    Ozone_Level = factor(Ozone_Level,
+                         levels = c("High (>60)", "Medium (30–60)", "Low (<30)", "Missing"))
+  )
+
+  # Count days per month & ozone category
+  stacked_data <- df %>%
+    group_by(Month, Ozone_Level) %>%
+    summarise(Days = n(), .groups = "drop")
+
+  # Blue gradient colors (light → dark)
+  ozone_colors <- c(
+    "Missing" = "#D6EAF8",
+    "Low (<30)" = "#85C1E9",
+    "Medium (30–60)" = "#2874A6",
+    "High (>60)" = "#1B4F72"
+  )
+
 }
+# Run the function
+plot_stacked_bar()
 
 # ====================================================================
 # SECTION 5: HISTOGRAM - Aarchi Teli (2318)
