@@ -13,15 +13,12 @@
 # Harsh Palyekar 2329
 # ====================================================================
 
-# Load dataset
-data(airquality)
 
-# View structure
-str(airquality)
 
 
 
 #Pie Chart 
+data(airquality)
 
 # Bar Chart
 
