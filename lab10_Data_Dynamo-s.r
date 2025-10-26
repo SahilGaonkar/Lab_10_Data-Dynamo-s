@@ -129,8 +129,29 @@ plot_stacked_bar <- function() {
 # ====================================================================
 plot_histogram <- function() {
   
+  # Simple message
+  cat("Creating Histogram for Ozone Levels...\n")
   
-  cat("Histogram section - Aarchi Teli\n")
+  # Calculate summary statistics for logic
+  avg_ozone <- mean(air_data$Ozone)
+  
+  # Create Histogram
+  hist(air_data$Ozone,
+       main = "Distribution of Ozone Levels",
+       xlab = "Ozone (ppb)",
+       ylab = "Frequency",
+       col = "lightblue",
+       border = "black")
+  
+  # Add a vertical line showing the average Ozone
+  abline(v = avg_ozone, col = "red", lwd = 2, lty = 2)
+  
+  # Add a legend for clarity
+  legend("topright",
+         legend = paste("Average Ozone =", round(avg_ozone, 1)),
+         col = "red", lwd = 2, lty = 2, bty = "n")
+  
+  cat("Histogram section - Aarchi Teli (2318) - Complete\n")
 }
 
 # ====================================================================
