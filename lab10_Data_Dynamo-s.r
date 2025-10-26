@@ -128,31 +128,62 @@ plot_stacked_bar <- function() {
 # SECTION 5: HISTOGRAM - Aarchi Teli (2318)
 # ====================================================================
 plot_histogram <- function() {
+  # Load required libraries (only if not already loaded)
+  if (!require("ggplot2", quietly = TRUE)) {
+    stop("ggplot2 package required. Please install it with: install.packages('ggplot2')")
+  }
   
   # Simple message
   cat("Creating Histogram for Ozone Levels...\n")
   
-  # Calculate summary statistics for logic
-  avg_ozone <- mean(air_data$Ozone)
+  # Handle missing values and prepare data
+  ozone_data <- na.omit(air_data$Ozone)
   
-  # Create Histogram
-  hist(air_data$Ozone,
-       main = "Distribution of Ozone Levels",
-       xlab = "Ozone (ppb)",
-       ylab = "Frequency",
-       col = "lightblue",
-       border = "black")
+  # Calculate mean 
+  avg_ozone <- mean(ozone_data)
   
-  # Add a vertical line showing the average Ozone
-  abline(v = avg_ozone, col = "red", lwd = 2, lty = 2)
+  # Create the Histogram using ggplot2
+  hist_plot <- ggplot(air_data, aes(x = Ozone)) +
+    geom_histogram(
+      binwidth = 10,                     # width of bins
+      fill = "lightblue", 
+      color = "black", 
+      alpha = 0.8
+    ) +
+    geom_vline(aes(xintercept = avg_ozone), 
+               color = "red", 
+               linetype = "dashed", 
+               size = 1.2) +
+    labs(
+      title = "Distribution of Ozone Levels",
+      subtitle = "Histogram showing frequency of Ozone concentrations",
+      x = "Ozone (ppb)",
+      y = "Frequency",
+      caption = "Data Source: airquality dataset"
+    ) +
+    annotate("text", x = avg_ozone + 5, y = 10, 
+             label = paste("Mean =", round(avg_ozone, 1)), 
+             color = "red", size = 3.5, hjust = 0) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(face = "bold", size = 14),
+      plot.subtitle = element_text(size = 10, color = "gray40")
+    )
   
-  # Add a legend for clarity
-  legend("topright",
-         legend = paste("Average Ozone =", round(avg_ozone, 1)),
-         col = "red", lwd = 2, lty = 2, bty = "n")
+  # Display the plot
+  print(hist_plot)
+  
+  # Save the histogram image 
+  if (!dir.exists("images")) dir.create("images")
+  ggsave("images/histogram_ozone.png", hist_plot, width = 8, height = 5, dpi = 300)
   
   cat("Histogram section - Aarchi Teli (2318) - Complete\n")
+  
+  invisible(hist_plot)
 }
+
+plot_histogram()
+
 
 # ====================================================================
 # SECTION 6: DOT CHART - Atharv Gawas (2313)
