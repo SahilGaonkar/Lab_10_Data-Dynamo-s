@@ -107,12 +107,29 @@ print("Bar plot created and saved to images/barplot_ozone_by_month.png")
 # ====================================================================
 # SECTION 3: LINE CHART - Prabhanjan Halvegar (2306)
 # ====================================================================
+
 plot_line_chart <- function() {
+  library(ggplot2)
+  cat("Generating Line Chart (Ozone) - Prabhanjan Halvegar (2306)...\n")
   
   
-  cat("Line Chart section - Prabhanjan Halvegar\n")
+  line_plot <- ggplot(air_data, aes(x = Day, y = Ozone, color = Month, group = Month)) +
+    geom_line(linewidth = 1.2, na.rm = TRUE) +
+    geom_point(size = 2, na.rm = TRUE) +
+    labs(title = "Daily Ozone Trend by Month (New York, 1973)",
+         x = "Day of Month", y = "Ozone (ppb)", color = "Month") +
+    theme_minimal() +
+    theme(plot.title = element_text(face = "bold", size = 14),
+          legend.title = element_text(face = "bold"),
+          legend.position = "top")
+  
+  if(!dir.exists("images")) dir.create("images")
+  ggsave("images/linechart_ozone_trend.png", line_plot, width = 8, height = 5, dpi = 300)
+  
+  print(line_plot)
+  cat("Line Chart saved as images/linechart_ozone_trend.png\n")
+  cat("Line Chart section - Prabhanjhan Halvegar - Compelete\n")  
 }
-#  code ended
 
 # ====================================================================
 # SECTION 4: STACKED BAR CHART - Sahil Gaonkar (2305)
