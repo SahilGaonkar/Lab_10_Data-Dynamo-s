@@ -108,6 +108,7 @@ plot_line_chart <- function() {
   print(line_plot)
   cat("Line Chart saved as images/linechart_ozone_trend.png\n")
 }
+#  code ended
 
 plot_line_chart()
 
