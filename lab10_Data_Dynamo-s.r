@@ -82,50 +82,35 @@ print("Bar plot created and saved to images/barplot_ozone_by_month.png")
 # ====================================================================
 # SECTION 3: LINE CHART - Prabhanjan Halvegar (2306)
 # ====================================================================
+library(ggplot2)
+
 plot_line_chart <- function() {
-  # LINE CHART — by Prabhanjan Halvegar (2306)
-  # Plot: Daily Temperature Trend by Month (airquality dataset)
+  cat("Generating Line Chart (Ozone) - Prabhanjan Halvegar (2306)...\n")
   
-  # Ensure necessary data is available
-  data("airquality")
-  air_data <- na.omit(airquality)
+  air_data <- na.omit(airquality[, c("Month", "Day", "Ozone")])
   air_data$Month <- factor(air_data$Month,
-                           levels = c(5, 6, 7, 8, 9),
-                           labels = c("May", "June", "July", "August", "September"))
+                           levels = 5:9,
+                           labels = c("May","June","July","August","September"))
   
-  # Unique months and colors
-  unique_months <- unique(air_data$Month)
-  colors <- rainbow(length(unique_months))
+  line_plot <- ggplot(air_data, aes(x = Day, y = Ozone, color = Month, group = Month)) +
+    geom_line(linewidth = 1.2, na.rm = TRUE) +
+    geom_point(size = 2, na.rm = TRUE) +
+    labs(title = "Daily Ozone Trend by Month (New York, 1973)",
+         x = "Day of Month", y = "Ozone (ppb)", color = "Month") +
+    theme_minimal() +
+    theme(plot.title = element_text(face = "bold", size = 14),
+          legend.title = element_text(face = "bold"),
+          legend.position = "top")
   
-  # Create blank plot frame
-  plot(NULL,
-       xlim = c(1, 31),
-       ylim = range(air_data$Temp, na.rm = TRUE),
-       main = "Daily Temperature Trend by Month (New York, 1973)",
-       xlab = "Day of Month",
-       ylab = "Temperature (°F)")
+  if(!dir.exists("images")) dir.create("images")
+  ggsave("images/linechart_ozone_trend.png", line_plot, width = 8, height = 5, dpi = 300)
   
-  # Add separate line for each month
-  for (i in seq_along(unique_months)) {
-    month_data <- subset(air_data, Month == unique_months[i])
-    lines(month_data$Day, month_data$Temp, col = colors[i], lwd = 2)
-  }
-  
-  # Add legend
-  legend("topright",
-         legend = unique_months,
-         col = colors,
-         lwd = 2,
-         cex = 0.8,
-         title = "Month")
-  
-  # Save the plot as an image file (like other teammates)
-  if (!dir.exists("images")) dir.create("images")
-  dev.copy(png, filename = "images/linechart_temperature_trend.png", width = 800, height = 500)
-  dev.off()
-  
-  cat("Line Chart section - Prabhanjan Halvegar (2306) - Complete\n")
+  print(line_plot)
+  cat("Line Chart saved as images/linechart_ozone_trend.png\n")
 }
+
+plot_line_chart()
+
 
 # ====================================================================
 # SECTION 4: STACKED BAR CHART - Sahil Gaonkar (2305)
