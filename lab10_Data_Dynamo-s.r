@@ -157,8 +157,7 @@ plot_stacked_bar <- function() {
     "Low (<30)" = "#85C1E9",
     "Medium (30–60)" = "#2874A6",
     "High (>60)" = "#1B4F72"
-  )
-
+  ) 
     # Create stacked bar chart
   stacked_plot <- ggplot(stacked_data, aes(x = Month, y = Days, fill = Ozone_Level)) +
     geom_col(color = "black", width = 0.7) +
