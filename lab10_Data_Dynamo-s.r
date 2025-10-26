@@ -112,6 +112,7 @@ plot_line_chart <- function() {
   
   cat("Line Chart section - Prabhanjan Halvegar\n")
 }
+#  code ended
 
 # ====================================================================
 # SECTION 4: STACKED BAR CHART - Sahil Gaonkar (2305)
