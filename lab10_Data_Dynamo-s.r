@@ -68,41 +68,54 @@ plot_pie_chart <- function() {
 # SECTION 2: BAR CHART - Sarvadhnya Patil (2321)
 # ====================================================================
 plot_bar_chart <- function() {
+  # ------------------------------
+  # BAR PLOT — by Sarvadhnya (2321)
+  # Plot: Mean Ozone by Month (airquality dataset)
+  # ------------------------------
 
-# BAR PLOT — by Sarvadhnya (2321)
-# Plot: Mean Ozone by Month (airquality dataset)
+  library(ggplot2)
+  library(dplyr)
 
-library(ggplot2)
-library(dplyr)
+  # Load and clean data
+  data("airquality")
+  aq <- na.omit(airquality)
 
-# Load and clean data
-data("airquality")
-aq <- na.omit(airquality)
+  # Calculate mean ozone by month
+  ozone_by_month <- aq %>%
+    group_by(Month) %>%
+    summarise(mean_ozone = mean(Ozone, na.rm = TRUE))
 
-ozone_by_month <- aq %>%
-  group_by(Month) %>%
-  summarise(mean_ozone = mean(Ozone))
+  # Convert month numbers to month names
+  ozone_by_month$Month <- factor(
+    ozone_by_month$Month,
+    labels = c("May", "Jun", "Jul", "Aug", "Sep")
+  )
 
-ozone_by_month$Month <- factor(ozone_by_month$Month,
-                               labels = c("May", "Jun", "Jul", "Aug", "Sep"))
+  # Create the bar plot (with legend visible)
+  bar_plot <- ggplot(ozone_by_month, aes(x = Month, y = mean_ozone, fill = Month)) +
+    geom_col(width = 0.7, show.legend = TRUE) +
+    labs(
+      title = "Mean Ozone Levels by Month",
+      subtitle = "Airquality dataset (New York, May–Sep 1973)",
+      x = "Month",
+      y = "Mean Ozone (ppb)",
+      fill = "Month",  # Legend title
+      caption = "Source: airquality dataset"
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(
+      legend.position = "right",     # Show legend on right
+      plot.title = element_text(face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(hjust = 0.5)
+    )
 
-# Create the bar plot
-bar_plot <- ggplot(ozone_by_month, aes(x = Month, y = mean_ozone, fill = Month)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Mean Ozone Levels by Month",
-       x = "Month",
-       y = "Mean Ozone (ppb)",
-       caption = "Data Source: airquality dataset") +
-  theme_minimal() +
-  theme(legend.position = "none")
+  # Save plot
+  if (!dir.exists("images")) dir.create("images")
+  ggsave("images/barplot_ozone_by_month.png", bar_plot, width = 7, height = 5, dpi = 300)
 
-# Save plot
-if (!dir.exists("images")) dir.create("images")
-ggsave("images/barplot_ozone_by_month.png", bar_plot, width = 7, height = 5, dpi = 300)
+  print("✅ Bar plot (with legend) created and saved to images/barplot_ozone_by_month.png")
 
-print("Bar plot created and saved to images/barplot_ozone_by_month.png")
-  
-  cat("Bar Chart section - Sarvadhnya Patil\n")
+  cat("Bar Chart section - Sarvadhnya Patil (2321)\n")
 }
 
 
