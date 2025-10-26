@@ -32,6 +32,7 @@ month_colors <- c("steelblue", "seagreen3", "darkorange", "firebrick3", "purple"
 # SECTION 1: PIE CHART - Esha Kambli (2301)
 # ====================================================================
 plot_pie_chart <- function() {
+  
   # Calculate average Ozone by Month (using shared air_data)
   avg_ozone <- tapply(air_data$Ozone, air_data$Month, mean)
 
