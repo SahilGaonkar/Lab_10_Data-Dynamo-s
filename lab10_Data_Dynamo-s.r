@@ -136,6 +136,32 @@ plot_stacked_bar <- function() {
     "High (>60)" = "#1B4F72"
   )
 
+    # Create stacked bar chart
+  stacked_plot <- ggplot(stacked_data, aes(x = Month, y = Days, fill = Ozone_Level)) +
+    geom_col(color = "black", width = 0.7) +
+    scale_fill_manual(values = ozone_colors) +
+    labs(title = "Monthly Distribution of Ozone Levels (May–September)",
+         x = "Month", y = "Number of Days", fill = "Ozone Category") +
+    theme_minimal(base_size = 13) +
+    theme(plot.title = element_text(face = "bold", size = 15),
+          legend.title = element_text(face = "bold"),
+          panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank()) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.05))) # optional: clean top spacing
+
+  # Display plot
+  print(stacked_plot)
+
+  # Save plot as PNG
+  if(!dir.exists("images")) dir.create("images")
+  ggsave("images/stacked_bar_ozone_may_sep.png", stacked_plot,
+         width = 8, height = 5, dpi = 300)
+
+  cat("Stacked Bar Chart - Sahil Gaonkar - Complete\n")
+  invisible(stacked_plot)
+
+
+
 }
 # Run the function
 plot_stacked_bar()
