@@ -321,11 +321,50 @@ plot_dot_chart <- function() {
 # ====================================================================
 # SECTION 7: SCATTER CHART - Harsh Palyekar (2329)
 # ====================================================================
-plot_scatter_chart <- function() {
+# ====================================================================
+# SECTION 7: SCATTER CHART - Harsh Palyekar (2329)
+# ====================================================================
 
-  
-  cat("Scatter Chart section - Harsh Palyekar\n")
+plot_scatter_chart <- function() {
+  # Load required libraries
+  if (!require("ggplot2", quietly = TRUE)) {
+    install.packages("ggplot2")
+    library(ggplot2)
+  }
+
+  # Create scatter plot: Ozone vs Wind, colored by Month
+  scatter_plot <- ggplot(air_data, aes(x = Wind, y = Ozone, color = Month)) +
+    geom_point(size = 3, alpha = 0.8) +
+    labs(
+      title = "Scatter Plot of Ozone vs Wind",
+      subtitle = "Each point shows daily Ozone vs Wind reading",
+      x = "Wind (mph)",
+      y = "Ozone (ppb)",
+      color = "Month",
+      caption = "Data Source: airquality dataset"
+    ) +
+    scale_color_manual(values = month_colors) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(face = "bold", size = 14),
+      plot.subtitle = element_text(size = 10, color = "gray40"),
+      legend.position = "right",
+      legend.title = element_text(face = "bold")
+    )
+
+  # Display the plot in RStudio / Codespace Viewer
+  print(scatter_plot)
+
+  # Save the plot to images folder
+  if (!dir.exists("images")) dir.create("images")
+  file_path <- "images/scatter_ozone_wind_by_month.png"
+  ggsave(file_path, scatter_plot, width = 8, height = 5, dpi = 300)
+
+  # Print confirmation message
+  cat("📁 Saved plot to:", file_path, "\n")
+  cat("✅ Scatter Chart section - Harsh Palyekar (2329) - Complete\n")
 }
+
 
 # ====================================================================
 # SECTION 8: BOX PLOT - Deversh Shetgaonkar (2302)
