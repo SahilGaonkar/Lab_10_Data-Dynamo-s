@@ -58,8 +58,8 @@ plot_pie_chart <- function() {
     fill = month_colors,
     title = "Months"
   )
-  
-  cat("Pie Chart section - Esha Kambli\n")
+
+  cat("Pie Chart section - Esha Kambli - Complete\n")
 }
 
 # ====================================================================
