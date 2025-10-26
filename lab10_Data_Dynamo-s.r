@@ -91,9 +91,7 @@ plot_line_chart <- function() {
 # ====================================================================
 # SECTION 4: STACKED BAR CHART - Sahil Gaonkar (2305)
 # ====================================================================
-# ====================================================================
-# STACKED BAR CHART - Sahil Gaonkar (2305)
-# ====================================================================
+
 plot_stacked_bar <- function() {
   # Install & load required packages
   if (!require("ggplot2", quietly = TRUE)) install.packages("ggplot2"); library(ggplot2)
