@@ -1,0 +1,32 @@
+Plot Design and Rationale
+
+By displaying all variables simultaneously in a grid layout, viewers can compare patterns across different measurements and identify relationships between variables.
+The standard boxplot design is enhanced by adding jitter points overlaid on each boxplot. With relatively small sample sizes per month (ranging from 14-31 observations), showing individual data points provides transparency about the actual distribution and density of measurements. The jitter adds horizontal spread to prevent overplotting while maintaining
+accurate vertical positioning
+
+
+What Each Panel Shows:-
+
+ Panel A - Ozone (Air Quality Indicator): 
+ Ozone shows dramatic month-to-month variation, with May displaying median values around 18 ppb and July-August reaching 60 ppb—a threefold increase. The jitter points reveal substantial day-to-day
+ variability in summer months, with several extreme outliers above 100 ppb representing air quality alert conditions. This panel demonstrates that ozone pollution is distinctly a summer problem, with peak concentrations in mid-summer.
+
+ Panel B - Solar Radiation: 
+ Solar radiation remains relatively stable across months compared to other variables, with medians clustering between 180-220 lang. May shows slightly higher median values, which seems counterintuitive until
+ considering that clearer spring skies may allow more direct sunlight compared to hazier summer conditions. The jitter reveals moderate day-to-day variability and several low-radiation outliers, likely representing cloudy or rainy days.
+
+ Panel C - Temperature:
+ Temperature displays the expected seasonal progression from cool May (median ~67°F) through peak summer July-August (median ~84°F) and back down in September (~77°F). This panel serves as the reference pattern
+ because Plots 1-4 already established these temperature trends in detail. The tight clustering of points and few outliers indicates temperature is more consistent day-to-day than other variables.
+
+ Panel D - Wind Speed:
+ Wind shows an interesting inverse relationship with temperature and ozone. May displays highest median wind speeds (~12 mph), while summer months show progressively lower values (~9-10 mph). This pattern explains
+ part of the ozone accumulation in summer: stagnant air masses trap pollutants. The negative correlation between wind and ozone (r = -0.61) is visually apparent when comparing panels A and D.
+
+
+Implementation:-
+
+ ggpubr package's ggarrange() function was used to create the 2×2 grid layout. Each panel uses qplot() with geom = "boxplot" for the base visualization, then adds geom_jitter(width = 0.2, alpha = 0.4, size = 1.5) to overlay individual points. The width parameter controls horizontal spread, alpha adds transparency to show overlapping points, and size determines point diameter.
+
+ Month was converted from numeric (5-9) to factor with named levels ("May" through "September") to ensure proper ordering and labeling. Color coding distinguishes months, with only panel A retaining the legend to avoid redundancy. The annotate_figure() function adds an overall title and data source caption that applies to the entire grid rather than individual
+ panels.
