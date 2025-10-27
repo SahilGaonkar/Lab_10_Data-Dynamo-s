@@ -157,11 +157,11 @@ plot_stacked_bar <- function() {
     Ozone_Level = case_when(
       is.na(Ozone) ~ "Missing",
       Ozone < 30   ~ "Low (<30)",
-      Ozone <= 60  ~ "Medium (30–60)",
+      Ozone <= 60  ~ "Medium (30-60)",
       TRUE         ~ "High (>60)"
     ),
     Ozone_Level = factor(Ozone_Level,
-                         levels = c("High (>60)", "Medium (30–60)", "Low (<30)", "Missing"))
+                         levels = c("High (>60)", "Medium (30-60)", "Low (<30)", "Missing"))
   )
 
   # Count days per month & ozone category
@@ -173,7 +173,7 @@ plot_stacked_bar <- function() {
   ozone_colors <- c(
     "Missing" = "#D6EAF8",
     "Low (<30)" = "#85C1E9",
-    "Medium (30–60)" = "#2874A6",
+    "Medium (30-60)" = "#2874A6",
     "High (>60)" = "#1B4F72"
   ) 
     # Create stacked bar chart
@@ -356,8 +356,8 @@ plot_scatter_chart <- function() {
   ggsave(file_path, scatter_plot, width = 8, height = 5, dpi = 300)
 
   # Print confirmation message
-  cat("📁 Saved plot to:", file_path, "\n")
-  cat("✅ Scatter Chart section - Harsh Palyekar (2329) - Complete\n")
+  cat(" Saved plot to:", file_path, "\n")
+  cat(" Scatter Chart section - Harsh Palyekar (2329) - Complete\n")
 }
 
 
