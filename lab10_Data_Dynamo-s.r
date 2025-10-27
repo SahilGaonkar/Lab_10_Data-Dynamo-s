@@ -42,6 +42,12 @@ plot_pie_chart <- function() {
   pie_labels <- paste(names(avg_ozone), "-", percentages, "%")
   legend_labels <- names(avg_ozone)
   
+  # Ensure the 'images' folder exists
+  if (!dir.exists("images")) dir.create("images")
+
+  # Save the plot to a PNG file
+  png("images/piechart_ozone_by_month.png", width = 800, height = 600)
+
   # Generate pie chart
   pie(
     avg_ozone,
@@ -58,9 +64,12 @@ plot_pie_chart <- function() {
     fill = month_colors,
     title = "Months"
   )
-  
-  cat("Pie Chart section - Esha Kambli - Complete\n")
+
+  dev.off()  # Close the graphics device
+
+  cat("✅ Pie Chart section - Esha Kambli - Complete\n")
 }
+
 
 # ====================================================================
 # SECTION 2: BAR CHART - Sarvadhnya Patil (2321)
